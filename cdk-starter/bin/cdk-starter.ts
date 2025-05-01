@@ -1,6 +1,6 @@
 #!/opt/homebrew/opt/node/bin/node
 import * as cdk from 'aws-cdk-lib';
-import { CdkStarterStack } from '../lib/cdk-starter-stack';
+import { PhotoStacks } from '../lib/PhotoStacks';
 
 const app = new cdk.App();
-new CdkStarterStack(app, 'CdkStarterStack');
+new PhotoStacks(app, 'PhotoStacks');
