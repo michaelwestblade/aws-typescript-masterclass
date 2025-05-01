@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Bucket, CfnBucket } from 'aws-cdk-lib/aws-s3';
+import { CfnOutput, CfnParameter } from 'aws-cdk-lib';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 class L3Bucket extends Construct {
@@ -25,9 +26,18 @@ export class CdkStarterStack extends cdk.Stack {
       },
     });
 
-    new Bucket(this, 'MyL2Bucket', {
-      lifecycleRules: [{ expiration: cdk.Duration.days(30) }],
+    const expirationInDays = new CfnParameter(this, 'ExpirationInDays', {
+      default: 30,
+      type: 'Number',
     });
+
+    const myL2Bucket = new Bucket(this, 'MyL2Bucket', {
+      lifecycleRules: [
+        { expiration: cdk.Duration.days(expirationInDays.valueAsNumber) },
+      ],
+    });
+
+    new CfnOutput(this, 'MyL2BucketName', { value: myL2Bucket.bucketName });
 
     new L3Bucket(this, 'MyL3Bucket', 1);
   }
