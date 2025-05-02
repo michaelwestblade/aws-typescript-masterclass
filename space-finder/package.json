@@ -3,17 +3,25 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "cdk deploy --all",
+    "synth": "cdk synth"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.149",
     "@types/node": "^22.15.3",
     "aws-cdk": "^2.1013.0",
     "aws-cdk-lib": "^2.194.0",
     "constructs": "^10.4.2",
+    "esbuild": "^0.25.3",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@types/uuid": "^10.0.0",
+    "uuid": "^11.1.0"
   }
 }
