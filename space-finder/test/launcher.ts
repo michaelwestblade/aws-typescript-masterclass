@@ -1,11 +1,11 @@
-import {handler} from '../src/services/hello';
+import { handler } from '../src/services/spaces/handler';
 
 handler(
   {
-    body: null,
+    body: '{"location": "London"}',
     headers: {},
     multiValueHeaders: {},
-    httpMethod: '',
+    httpMethod: 'POST',
     isBase64Encoded: false,
     path: '',
     pathParameters: null,
