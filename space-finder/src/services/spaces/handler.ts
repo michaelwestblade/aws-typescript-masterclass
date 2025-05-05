@@ -6,6 +6,7 @@ import {
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PostSpaces } from './PostSpaces';
 import { GetSpaces } from './GetSpaces';
+import { UpdateSpaces } from './UpdateSpaces';
 
 const dynamoClient = new DynamoDBClient();
 
@@ -21,6 +22,8 @@ async function handler(
         return GetSpaces(event, dynamoClient);
       case 'POST':
         return PostSpaces(event, dynamoClient);
+      case 'PUT':
+        return UpdateSpaces(event, dynamoClient);
     }
   } catch (error: any) {
     return {
