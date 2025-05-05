@@ -6,7 +6,7 @@ handler(
     headers: {},
     multiValueHeaders: {},
     queryStringParameters: { id: 'c6ed8665-95a9-4dc4-9513-ae96a0ec485e' },
-    httpMethod: 'PUT',
+    httpMethod: 'DELETE',
   } as any,
   {} as any,
 );
