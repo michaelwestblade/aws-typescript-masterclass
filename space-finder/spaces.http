@@ -1,6 +1,10 @@
 
 ###
 GET  https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces
+
+###
+GET  https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces?id=c6ed8665-95a9-4dc4-9513-ae96a0ec485e
+
 ###
 
 POST  https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces
