@@ -8,6 +8,7 @@ import { PostSpaces } from './PostSpaces';
 import { GetSpaces } from './GetSpaces';
 import { UpdateSpaces } from './UpdateSpaces';
 import { DeleteSpaces } from './DeleteSpaces';
+import { MissingFieldException } from '../shared/DataValidator';
 
 const dynamoClient = new DynamoDBClient();
 
@@ -29,6 +30,12 @@ async function handler(
         return DeleteSpaces(event, dynamoClient);
     }
   } catch (error: any) {
+    if (error instanceof MissingFieldException) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: error?.message }),
+      };
+    }
     return {
       statusCode: 500,
       body: JSON.stringify({ message: error?.message }),
