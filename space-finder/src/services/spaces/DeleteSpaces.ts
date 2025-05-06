@@ -11,11 +11,19 @@ import {
 } from '@aws-sdk/client-dynamodb';
 import { v4 } from 'uuid';
 import { marshall } from '@aws-sdk/util-dynamodb';
+import { hasAdminGroup } from '../shared/Utils';
 
 export async function DeleteSpaces(
   event: APIGatewayProxyEvent,
   dynamoClient: DynamoDBClient,
 ): Promise<APIGatewayProxyResult> {
+  if (!hasAdminGroup(event)) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ message: 'not authorized' }),
+    };
+  }
+
   if (event.queryStringParameters && 'id' in event.queryStringParameters) {
     const spaceId = event.queryStringParameters.id || '';
 

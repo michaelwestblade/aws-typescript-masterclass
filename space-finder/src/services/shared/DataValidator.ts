@@ -1,5 +1,7 @@
 import { SpaceEntry } from '../model/Model';
 
+export class JsonError extends Error {}
+
 export class MissingFieldException extends Error {
   constructor(missingField: string) {
     super(`Value for ${missingField} expected`);
