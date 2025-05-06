@@ -1,16 +1,18 @@
 
 # @name Get Spaces
 GET  https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces
+Authorization: {{token}}
 
 ###
 # @name Get A Space
 GET  https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces?id=c6ed8665-95a9-4dc4-9513-ae96a0ec485e
+Authorization: {{token}}
 
 ###
 # @name Create Spaces
 POST  https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces
 Content-Type: application/json
-
+Authorization: {{token}}
 {
   "location": "Paris",
   "name": "Parisian stuff"
@@ -19,7 +21,7 @@ Content-Type: application/json
 # @name Edit Spaces
 PUT https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces/c6ed8665-95a9-4dc4-9513-ae96a0ec485e
 Content-Type: application/json
-
+Authorization: {{token}}
 {
   "location": "Paris2"
 }
@@ -29,4 +31,5 @@ Content-Type: application/json
 # @name Delete Spaces
 DELETE https://oznsxgrmr7.execute-api.us-east-2.amazonaws.com/prod/spaces/c6ed8665-95a9-4dc4-9513-ae96a0ec485e
 Content-Type: application/json
+Authorization: {{token}}
 ###
