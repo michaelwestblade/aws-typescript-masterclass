@@ -9,6 +9,7 @@ import { GetSpaces } from './GetSpaces';
 import { UpdateSpaces } from './UpdateSpaces';
 import { DeleteSpaces } from './DeleteSpaces';
 import { MissingFieldException } from '../shared/DataValidator';
+import { addCORSHeader } from '../shared/Utils';
 
 const dynamoClient = new DynamoDBClient();
 
@@ -16,18 +17,22 @@ async function handler(
   event: APIGatewayProxyEvent,
   context: Context,
 ): Promise<APIGatewayProxyResult> {
-  let message: string = '';
+  let response: APIGatewayProxyResult | undefined = undefined;
 
   try {
     switch (event.httpMethod) {
       case 'GET':
-        return GetSpaces(event, dynamoClient);
+        response = await GetSpaces(event, dynamoClient);
+        break;
       case 'POST':
-        return PostSpaces(event, dynamoClient);
+        response = await PostSpaces(event, dynamoClient);
+        break;
       case 'PUT':
-        return UpdateSpaces(event, dynamoClient);
+        response = await UpdateSpaces(event, dynamoClient);
+        break;
       case 'DELETE':
-        return DeleteSpaces(event, dynamoClient);
+        response = await DeleteSpaces(event, dynamoClient);
+        break;
     }
   } catch (error: any) {
     if (error instanceof MissingFieldException) {
@@ -42,10 +47,7 @@ async function handler(
     };
   }
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message }),
-  };
+  return addCORSHeader(response as APIGatewayProxyResult);
 }
 
 export { handler };

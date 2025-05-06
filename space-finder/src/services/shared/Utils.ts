@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { JsonError } from './DataValidator';
-import { APIGatewayProxyEvent } from 'aws-lambda';
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
 export function createRandomId() {
   return randomUUID();
@@ -22,4 +22,15 @@ export function hasAdminGroup(event: APIGatewayProxyEvent) {
   }
 
   return false;
+}
+
+export function addCORSHeader(arg: APIGatewayProxyResult) {
+  return {
+    ...arg,
+    headers: {
+      ...arg.headers,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+    },
+  };
 }
